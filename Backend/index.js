@@ -41,9 +41,15 @@ app.use(cookieParser())
 //for allowing json object in req body
 app.use(express.json())
 
-app.listen(3000, ()=>{
-    console.log("Server is Running on Port 3000")
-})
+const PORT = process.env.PORT || 3000; 
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+// app.listen(3000, ()=>{
+//     console.log("Server is Running on Port 3000")
+// })
 
 app.use("/api/auth", authRoutes)
 app.use("/api/user", userRoutes)  
