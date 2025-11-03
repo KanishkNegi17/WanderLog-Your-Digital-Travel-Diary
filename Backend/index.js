@@ -19,7 +19,7 @@ const app = express()
 
 const allowedOrigins = [
   "http://localhost:5173", // Your local frontend
-  process.env.FRONTEND_URL  // Your deployed Vercel URL (we'll add this to Vercel's settings)
+  FRONTEND_URL  // Your deployed Vercel URL (we'll add this to Vercel's settings)
 ];
 
 app.use(cors({
