@@ -18,7 +18,7 @@ mongoose.connect(process.env.MONGO_URI).then(()=>{console.log("Database Is Conne
 const app = express() 
 
 app.use(cors({
-    origin: "http://localhost:5173",//frontend URL
+    origin: true,//"http://localhost:5173",//frontend URL
     methods: ["GET","POST","PUT","DELETE"],
     credentials:true,
 }))
