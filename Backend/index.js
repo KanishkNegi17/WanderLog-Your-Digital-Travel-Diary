@@ -17,8 +17,22 @@ mongoose.connect(process.env.MONGO_URI).then(()=>{console.log("Database Is Conne
 
 const app = express() 
 
+const allowedOrigins = [
+  "http://localhost:5173", // Your local frontend
+  process.env.FRONTEND_URL  // Your deployed Vercel URL (we'll add this to Vercel's settings)
+];
+
 app.use(cors({
-    origin: true,//"http://localhost:5173",//frontend URL
+    //origin: "http://localhost:5173",//frontend URL
+    origin: function(origin,callback){
+        if(!origin) return callback(null,true);
+        
+        if (allowedOrigins.indexOf(origin) === -1) {
+        const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
     methods: ["GET","POST","PUT","DELETE"],
     credentials:true,
 }))

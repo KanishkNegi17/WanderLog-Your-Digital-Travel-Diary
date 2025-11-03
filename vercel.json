@@ -7,21 +7,23 @@
     },
     {
       "src": "Frontend/package.json",
-      "use": "@vercel/vite"
+      "use": "@vercel/static-build",
+      "config": {
+        "installCommand": "npm install",
+        "buildCommand": "npm run build",
+        "distDir": "dist"
+      }
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/Backend/index.js"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/Frontend/src/assets/$1"
+      "dest": "Backend/index.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/Frontend/index.html"
+      "dest": "Frontend/dist/index.html"
     }
   ]
 }
+
