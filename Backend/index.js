@@ -17,9 +17,11 @@ mongoose.connect(process.env.MONGO_URI).then(()=>{console.log("Database Is Conne
 
 const app = express() 
 const frontendUrl = process.env.FRONTEND_URL;
+const wwwFrontendUrl = frontendUrl ? frontendUrl.replace('https://', 'https://www.') : null;
 const allowedOrigins = [
   "http://localhost:5173", // Your local frontend
-  frontendUrl  // Your deployed Vercel URL (we'll add this to Vercel's settings)
+  frontendUrl,
+  wwwFrontendUrl  // Your deployed Vercel URL (we'll add this to Vercel's settings)
 ];
 
 app.use(cors({
