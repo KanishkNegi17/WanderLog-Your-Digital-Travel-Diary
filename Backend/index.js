@@ -16,10 +16,10 @@ dotenv.config()
 mongoose.connect(process.env.MONGO_URI).then(()=>{console.log("Database Is Connected")}).catch((err)=>{console.log(err)})
 
 const app = express() 
-
+const frontendUrl = process.env.FRONTEND_URL;
 const allowedOrigins = [
   "http://localhost:5173", // Your local frontend
-  FRONTEND_URL  // Your deployed Vercel URL (we'll add this to Vercel's settings)
+  frontendUrl  // Your deployed Vercel URL (we'll add this to Vercel's settings)
 ];
 
 app.use(cors({
