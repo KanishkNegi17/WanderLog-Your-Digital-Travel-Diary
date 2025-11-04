@@ -25,16 +25,16 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-    //origin: "http://localhost:5173",//frontend URL
-    origin: function(origin,callback){
-        if(!origin) return callback(null,true);
+    origin: true,//frontend URL
+    // origin: function(origin,callback){
+    //     if(!origin) return callback(null,true);
         
-        if (allowedOrigins.indexOf(origin) === -1) {
-        const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-        return callback(new Error(msg), false);
-      }
-      return callback(null, true);
-    },
+    //     if (allowedOrigins.indexOf(origin) === -1) {
+    //     const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+    //     return callback(new Error(msg), false);
+    //   }
+    //   return callback(null, true);
+    // },
     methods: ["GET","POST","PUT","DELETE"],
     credentials:true,
 }))
