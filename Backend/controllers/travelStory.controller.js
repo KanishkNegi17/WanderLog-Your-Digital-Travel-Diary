@@ -59,7 +59,9 @@ export const imageUpload = async(req, res, next)=>{
       if(!req.file){ 
          return next(errorHandler(400,"No image Uploaded"))
       }
-      const imageUrl = `http://localhost:3000/uploads/${req.file.filename}`
+      const baseUrl = process.env.BACKEND_URL || 'http://localhost:3000';
+      const imageUrl = `${baseUrl}/uploads/${req.file.filename}`;
+      // const imageUrl = `http://localhost:3000/uploads/${req.file.filename}`
       res.status(201).json({imageUrl})
       
     } catch (error) {
