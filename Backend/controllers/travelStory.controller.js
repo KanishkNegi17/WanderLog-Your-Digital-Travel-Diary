@@ -81,8 +81,10 @@ export const deleteImage= async(req, res, next)=>{
 
    try {
       //extract filename from image url
-
-      const filename = path.basename(imageUrl)
+      const parsedUrl = new URL(imageUrl); //EXTRA ADDED
+      const pathname = parsedUrl.pathname; //EXTRA ADDED
+      // const filename = path.basename(imageUrl)
+      const filename = path.basename(pathname);
 
       //deleting file path
 
