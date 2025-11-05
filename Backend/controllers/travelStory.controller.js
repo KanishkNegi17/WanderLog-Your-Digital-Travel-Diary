@@ -60,7 +60,7 @@ export const imageUpload = async(req, res, next)=>{
          return next(errorHandler(400,"No image Uploaded"))
       }
       const baseUrl = process.env.BACKEND_URL || 'http://localhost:3000';
-      const imageUrl = `${baseUrl}/uploads/${req.file.filename}`;
+      const imageUrl = `${process.env.BACKEND_URL}/uploads/${req.file.filename}`;
       // const imageUrl = `http://localhost:3000/uploads/${req.file.filename}`
       res.status(201).json({imageUrl})
       
@@ -118,7 +118,7 @@ export const editTravelStory = async(req, res, next)=>{
          next(errorHandler(404,"Travel Story Not Found "))
       }
 
-      const placeholderImageUrl = `http://localhost:3000/assets/placeholderImage.png`
+      const placeholderImageUrl = `${process.env.BACKEND_URL || 'http://localhost:3000'}/assets/placeholderImage.png`;
 
       travelStory.title = title
       travelStory.story = story
@@ -151,7 +151,7 @@ export const deleteTravelStory = async(req,res,next)=>{
       await travelStory.deleteOne({_id: id, userId: userId})
 
       //Checking If Image Is PlaceHolder
-      const placeholderImageUrl = `http://localhost:3000/assets/placeholderImage.png`
+      const placeholderImageUrl = `${process.env.BACKEND_URL || 'http://localhost:3000'}/assets/placeholderImage.png`;
 
       //Extract Filename from Image Url
       const imageUrl = travelStory.imageUrl
@@ -160,7 +160,10 @@ export const deleteTravelStory = async(req,res,next)=>{
          const filename = path.basename(imageUrl)
          const filepath= path.join(rootDir,"uploads",filename)
 
-         if(file.existsSync(filepath)){
+         // if(file.existsSync(filepath)){
+         //    await fs.promises.unlink(filepath)
+         // }
+         if(fs.existsSync(filepath)){
             await fs.promises.unlink(filepath)
          }
       }
